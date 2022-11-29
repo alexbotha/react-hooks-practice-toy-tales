@@ -47,6 +47,12 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "Alex Botha",
+      "image": "https://toystory.disney.com/sheriff-woody",
+      "likes": "",
+      "id": 9
     }
   ]
 }
