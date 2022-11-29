@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import ToyForm from "./ToyForm";
 import ToyContainer from "./ToyContainer";
-import ToyCard from "./ToyCard";
 
 const API = "http://localhost:3001/toys";
 
@@ -14,9 +13,7 @@ function App() {
   useEffect(() => {
     fetch(API)
       .then((r) => r.json())
-      .then((data) => {
-        setToys(data);
-      });
+      .then(setToys);
   }, []);
 
   function updatingToylist(newToyDetails) {
@@ -27,6 +24,18 @@ function App() {
     setShowForm((showForm) => !showForm);
   }
 
+  function handleDelete(toyToDelete) {
+    const deletedToyUpdate = toys.filter((toy) => toy.id !== toyToDelete.id);
+    setToys(deletedToyUpdate);
+  }
+
+  function handleUpdateToy(updatedToy) {
+    const updatedToys = toys.map((toy) =>
+      toy.id === updatedToy.id ? updatedToy : toy
+    );
+    setToys(updatedToys);
+  }
+
   return (
     <>
       <Header />
@@ -34,7 +43,11 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} />
+      <ToyContainer
+        toys={toys}
+        handleDelete={handleDelete}
+        onUpdateToy={handleUpdateToy}
+      />
     </>
   );
 }
